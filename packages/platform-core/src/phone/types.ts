@@ -11,15 +11,18 @@ export type PhoneNormalizationErrorCode =
   | "TOO_SHORT"
   | "TOO_LONG";
 
-export interface PhoneNormalizationError {
-  code: PhoneNormalizationErrorCode;
-  message: string;
-}
-
 /**
- * Discriminated union result. normalizePhone never throws for expected
- * invalid user input; consumers narrow on `ok` (form/registration use).
+ * Thrown by normalizePhone for expected invalid input (never silently
+ * sanitized). Consumers (registration form, matchOrCreateContact) catch
+ * and branch on `code`.
  */
-export type NormalizePhoneResult =
-  | { ok: true; value: PhoneE164 }
-  | { ok: false; error: PhoneNormalizationError };
+export class PhoneNormalizationError extends Error {
+  /** @internal */
+  readonly code: PhoneNormalizationErrorCode;
+
+  constructor(code: PhoneNormalizationErrorCode, message: string) {
+    super(message);
+    this.name = "PhoneNormalizationError";
+    this.code = code;
+  }
+}

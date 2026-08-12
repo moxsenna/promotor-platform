@@ -22,10 +22,6 @@ importers:
         version: 4.1.10(vite@8.2.1)
 
   packages/platform-core:
-    dependencies:
-      '@promotor/contracts':
-        specifier: workspace:*
-        version: link:../contracts
     devDependencies:
       typescript:
         specifier: ^5.9.3

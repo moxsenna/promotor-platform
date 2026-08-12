@@ -3,7 +3,8 @@ import type { PhoneE164 } from "./types";
 /**
  * Formats canonical E.164 input as display text, e.g. "+6281234567890" ->
  * "+62 812-3456-7890" (Indonesian mobile grouping for the common 11-digit
- * national length). Other valid lengths are chunked into 3-digit groups.
+ * national length). Other valid lengths are chunked into 3-digit groups
+ * ("+6281234567" -> "+62 812-3456").
  *
  * Round-trips through normalizePhone: output uses only digits, spaces and
  * dashes, all of which normalizePhone strips.
