@@ -21,7 +21,9 @@ export const PROMOTOR_SECONDARY_NAV: PromotorNavItem[] = [
 ];
 
 /** A nav item is active when the pathname equals its href or starts with it
-    plus a segment boundary ("/app/learners" matches "/app/learners/ct_…"). */
+    plus a segment boundary ("/app/learners" matches "/app/learners/ct_…").
+    "/app" itself is excluded from the prefix match so it never claims nested
+    routes like "/app/programs" — otherwise two items get aria-current. */
 export function isPromotorNavActive(href: string, pathname: string): boolean {
-  return pathname === href || pathname.startsWith(`${href}/`);
+  return pathname === href || (href !== "/app" && pathname.startsWith(`${href}/`));
 }
