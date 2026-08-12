@@ -1,0 +1,12 @@
+{
+  "name": "promotor-platform",
+  "private": true,
+  "packageManager": "pnpm@11.9.0",
+  "scripts": {
+    "dev:class": "pnpm --filter @promotor/promotor-class-web dev",
+    "build:class": "pnpm --filter @promotor/promotor-class-web build",
+    "typecheck": "pnpm -r typecheck",
+    "lint": "pnpm -r lint",
+    "test": "pnpm -r test"
+  }
+}
