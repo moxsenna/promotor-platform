@@ -5,7 +5,7 @@
  * They return plain data (contracts + fixture-local shapes re-exported here) —
  * never the store.
  */
-import type { Enrollment, Lesson, Module, Program } from "@promotor/contracts";
+import type { Enrollment, Lesson, Module, Program, LearningEventEnvelope } from "@promotor/contracts";
 import type { ContactWithSource, LessonProgress, ReflectionResponse } from "@promotor/promotor-class-fixtures";
 import { getDefaultStore } from "@/adapters/mock/mock-state-store";
 import { ProgramRepository } from "@/adapters/mock/program-repository";
@@ -47,6 +47,13 @@ export interface LessonDetailView {
   progress: LessonProgress | null;
   completed: boolean;
   reflection: ReflectionResponse | null;
+}
+
+/** Timeline row for the learner detail screen: event + curriculum context. */
+export interface LearningTimelineItem {
+  event: LearningEventEnvelope;
+  lessonTitle: string | null;
+  programTitle: string | null;
 }
 
 function resolveDeps(deps?: Partial<LearningDeps>): LearningDeps {
@@ -145,4 +152,35 @@ export function getLesson(
     completed: progress?.completedAt !== null && progress !== null,
     reflection: learners.getReflection(enrollment.id, lessonId),
   };
+}
+
+/**
+ * Per-contact learning timeline (chronological asc, T6 ordering) enriched
+ * with lesson/program titles so the screen never touches fixtures or state.
+ */
+export function listLearningTimelineByContact(
+  contactId: string,
+  deps?: Partial<LearningDeps>
+): LearningTimelineItem[] {
+  const { curriculum, learners } = resolveDeps(deps);
+  return learners.listLearningEventsByContact(contactId).map((event) => {
+    const lessonId = event.subject?.lessonId;
+    const programId = event.subject?.programId;
+    const lesson = lessonId ? curriculum.getLessonById(lessonId) : null;
+    const program = programId ? curriculum.getProgramById(programId) : null;
+    return {
+      event,
+      lessonTitle: lesson?.title ?? null,
+      programTitle: program?.title ?? null,
+    };
+  });
+}
+
+/** Raw reflection responses for one contact (learner detail owns reflection display). */
+export function listReflectionsByContact(
+  contactId: string,
+  deps?: Partial<LearningDeps>
+): ReflectionResponse[] {
+  const { learners } = resolveDeps(deps);
+  return learners.listReflectionsByContact(contactId);
 }

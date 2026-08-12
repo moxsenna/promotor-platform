@@ -11,6 +11,7 @@ export interface EnrollmentQueryPort {
     programId: string
   ): Enrollment | null;
   listEnrollmentsByContact(contactId: string): Enrollment[];
+  listEnrollments(): Enrollment[];
 }
 
 export interface EnrollmentCommandPort {

@@ -27,6 +27,12 @@ export function getProgramById(
   return catalog.getProgramById(programId);
 }
 
+/** Admin program list (all statuses, incl. drafts; /app/programs). */
+export function listPrograms(deps?: Partial<ProgramQueriesDeps>): Program[] {
+  const catalog = deps?.catalog ?? new ProgramRepository(getDefaultStore());
+  return catalog.listPrograms();
+}
+
 /** Public landing catalog: published + accessType public only. */
 export function listPublicPrograms(deps?: Partial<ProgramQueriesDeps>): Program[] {
   const catalog = deps?.catalog ?? new ProgramRepository(getDefaultStore());

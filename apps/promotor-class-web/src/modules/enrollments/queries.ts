@@ -36,3 +36,11 @@ export function listEnrollmentsByContact(
   const enrollments = deps?.enrollments ?? new LearnerRepository(getDefaultStore());
   return enrollments.listEnrollmentsByContact(contactId);
 }
+
+/** All enrollments (admin program list uses this for learner counts). */
+export function listEnrollments(
+  deps?: Partial<EnrollmentQueriesDeps>
+): Enrollment[] {
+  const enrollments = deps?.enrollments ?? new LearnerRepository(getDefaultStore());
+  return enrollments.listEnrollments();
+}

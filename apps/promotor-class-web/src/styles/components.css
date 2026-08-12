@@ -336,6 +336,75 @@
   margin-top: var(--space-4);
 }
 
+/* ---------- Promotor data rows (design.md §11 content/separator rhythm) ---------- */
+
+.pc-section-count {
+  font-size: var(--font-size-13);
+  color: var(--color-text-faint);
+}
+
+.pc-meta {
+  font-size: var(--font-size-13);
+  color: var(--color-text-muted);
+}
+
+.pc-list-row {
+  padding-block: var(--space-4);
+}
+
+.pc-list-row-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-3);
+  flex-wrap: wrap;
+}
+
+/* ---------- Learning timeline (design.md §24 signature pattern) ---------- */
+
+.pc-timeline {
+  display: flex;
+  flex-direction: column;
+}
+
+.pc-timeline-item {
+  display: flex;
+  gap: var(--space-3);
+  padding-block: var(--space-3);
+}
+
+.pc-timeline-dot {
+  width: 8px;
+  height: 8px;
+  margin-top: 6px;
+  border-radius: 50%;
+  background: var(--color-border-dark);
+  flex: none;
+}
+
+.pc-timeline-body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+/* ---------- Reflection block (design.md §32) ---------- */
+
+.pc-reflection {
+  padding-left: var(--space-3);
+  border-left: 2px solid var(--color-border-dark);
+  font-size: var(--font-size-14);
+  line-height: var(--leading-reading);
+}
+
+/* ---------- Curriculum module heading (program detail) ---------- */
+
+.pc-module-title {
+  font-size: var(--font-size-16);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text);
+}
+
 /* ---------- Promotor shell ---------- */
 
 .pc-app-shell {

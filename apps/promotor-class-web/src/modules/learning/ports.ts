@@ -6,7 +6,13 @@
  * and the learning service (completion + reflection mutations). Screens only
  * ever import this module's queries/commands.
  */
-import type { Enrollment, Lesson, Module, Program } from "@promotor/contracts";
+import type {
+  Enrollment,
+  LearningEventEnvelope,
+  Lesson,
+  Module,
+  Program,
+} from "@promotor/contracts";
 import type { ContactWithSource, LessonProgress, ReflectionResponse } from "@promotor/promotor-class-fixtures";
 import type {
   CompleteLessonInput,
@@ -29,6 +35,9 @@ export interface LearningLearnerPort {
   listLessonProgressByEnrollment(enrollmentId: string): LessonProgress[];
   getLessonProgress(enrollmentId: string, lessonId: string): LessonProgress | null;
   getReflection(enrollmentId: string, lessonId: string): ReflectionResponse | null;
+  listReflectionsByContact(contactId: string): ReflectionResponse[];
+  /** Append-only per-contact timeline, chronological asc (T6 ordering). */
+  listLearningEventsByContact(contactId: string): LearningEventEnvelope[];
 }
 
 export interface LearningServicePort {
