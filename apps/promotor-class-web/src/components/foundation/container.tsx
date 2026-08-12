@@ -1,0 +1,13 @@
+import type { ReactNode } from "react";
+
+type ContainerProps = {
+  children: ReactNode;
+  size?: "default" | "narrow";
+  className?: string;
+};
+
+/** Page content wrapper. "narrow" caps width at the reading width (720px). */
+export function Container({ children, size = "default", className }: ContainerProps) {
+  const classes = ["pc-container", size === "narrow" ? "pc-container--narrow" : "", className].filter(Boolean);
+  return <div className={classes.join(" ")}>{children}</div>;
+}
