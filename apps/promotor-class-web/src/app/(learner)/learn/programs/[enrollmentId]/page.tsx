@@ -2,6 +2,7 @@ import { getEnrollment } from "@/modules/learning/queries";
 import { Stack, SectionHeader, ProgressBar, TextLink, Divider } from "@/components/foundation";
 import { LearnerContent } from "@/components/learner-shell/learner-content";
 import EnrollmentPageClient from "./page-client";
+import ReorderClient from "./reorder-client";
 
 type EnrollmentPageRouteProps = {
   params: Promise<{ enrollmentId: string }>;
@@ -79,6 +80,15 @@ export default async function EnrollmentPageRoute({ params }: EnrollmentPageRout
 
         {/* Curriculum sections */}
         <SectionHeader title="Materi pembelajaran" />
+
+        {/* Reordering controls (Turn 4b) */}
+        <ReorderClient 
+          initialOrder={[...modules.flatMap(m => m.lessons.map(l => l.lesson.id))]}
+          onOrderChange={(newOrder) => {
+            console.log("Order changed:", newOrder);
+            // TODO: persist order via command port
+          }}
+        />
 
         <Stack gap="6">
           {modules.map((modGroup) => {
