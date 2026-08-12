@@ -50,24 +50,25 @@ export default function PromotorHomePage() {
   return (
     <Container size="wide">
       <Stack gap="8">
-        {/* Header with date only (Turn 4a mockup) */}
-        <div className="pc-app-header">
-          <div>
-            <h1 className="pc-page-title">Beranda</h1>
-            <p className="pc-meta pc-meta--muted">Selasa, 11 Agu</p>
-          </div>
+        {/* Header: title left, date right (Turn 4a exact) */}
+        <div className="pc-home-header">
+          <h1 className="pc-page-title">Beranda</h1>
+          <span className="pc-date">{formatDateTime("2025-08-12T00:00:00Z")}</span>
         </div>
         
+        {/* Stats line below header */}
         <p className="pc-home-stats">
           174 peserta aktif · 32 baru bulan ini · rata-rata 67% selesai
         </p>
         
-        <Divider />
-        <Stack gap="2">
-          <SectionHeader
-            title="Perlu perhatian"
-            action={<span className="pc-section-count">{queue.length}</span>}
-          />
+        {/* Section divider WITHIN header container */}
+        <div className="pc-section-divider">
+          <h2 className="pc-section-title">Perlu perhatian</h2>
+          <span className="pc-section-count">{queue.length}</span>
+        </div>
+        
+        {/* Scrollable content area */}
+        <div className="pc-content-scroll">
           {scenario === "BUNDLE_FLOW_UNAVAILABLE" ? (
             <StatusText>Sinkronisasi ke PromotorFlow sedang antre.</StatusText>
           ) : null}
@@ -86,20 +87,18 @@ export default function PromotorHomePage() {
                   <span>Lihat {queue.length - 4} lainnya</span>
                 </div>
               )}
+              
+              {/* Aktivitas terbaru section */}
+              <div className="pc-activity-header">Aktivitas terbaru</div>
+              <div className="pc-timeline-simple">
+                <div className="pc-timeline-time">03:01</div>
+                <div className="pc-timeline-text">Ayu menyelesaikan Rencana Tindakan</div>
+                <div className="pc-timeline-time">02:44</div>
+                <div className="pc-timeline-text">Ayu mengisi refleksi</div>
+              </div>
             </>
           )}
-        </Stack>
-        <Divider />
-        <Stack gap="2">
-          <SectionHeader title="Aktivitas terbaru" />
-          {/* Simple two-column timeline: timestamp | action */}
-          <div className="pc-timeline-simple">
-            <div className="pc-timeline-time">03:01</div>
-            <div className="pc-timeline-text">Ayu menyelesaikan Rencana Tindakan</div>
-            <div className="pc-timeline-time">02:44</div>
-            <div className="pc-timeline-text">Ayu mengisi refleksi</div>
-          </div>
-        </Stack>
+        </div>
       </Stack>
     </Container>
   );

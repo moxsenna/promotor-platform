@@ -460,31 +460,67 @@
   margin-top: var(--space-1);
 }
 
-.pc-app-header {
+/* ---------- Home header - Turn 4a exact structure ---------- */
+
+.pc-home-header {
   display: flex;
-  align-items: center;
   justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: var(--space-2);
   gap: var(--space-4);
 }
 
-.pc-progress-indicator {
-  display: flex;
-  align-items: baseline;
-  gap: var(--space-2);
-  text-align: right;
-}
-
-.pc-progress-value {
-  font-size: var(--font-size-18);
-  font-weight: var(--weight-semibold);
-  color: var(--color-accent);
-}
-
-.pc-progress-label {
+.pc-home-stats {
   font-size: var(--font-size-13);
   color: var(--color-text-muted);
   line-height: var(--leading-body);
+  margin: 0 0 var(--space-3) 0;
 }
+
+.pc-section-divider {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: var(--space-5);
+  padding-bottom: var(--space-2);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.pc-section-title {
+  font-size: var(--font-size-17);
+  font-weight: var(--weight-semibold);
+  margin: 0;
+  color: var(--color-text);
+}
+
+.pc-section-count {
+  font-size: var(--font-size-13);
+  color: var(--color-text-muted);
+}
+
+.pc-date {
+  font-size: var(--font-size-12);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+/* Scrollable content area */
+.pc-content-scroll {
+  flex: 1;
+  overflow-y: auto;
+  padding-top: var(--space-3);
+}
+
+/* Aktivitas terbaru label */
+.pc-activity-header {
+  font-size: var(--font-size-12);
+  letter-spacing: var(--letter-spacing-wide);
+  text-transform: uppercase;
+  color: var(--color-text-muted);
+  padding: var(--space-4) 0 var(--space-1) 0;
+}
+
+/* ---------- Old header removed for new layout ---------- */
 
 .pc-list-more-link {
   padding: var(--space-4) 0;
