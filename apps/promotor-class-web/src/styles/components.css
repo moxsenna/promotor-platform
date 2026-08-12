@@ -1928,6 +1928,14 @@ a.pc-sheet-row:hover {
 
 /* ---------- Responsive shell utilities ---------- */
 
+.pc-queue-item {
+  transition: background 0.2s ease;
+}
+
+.pc-queue-item:hover {
+  background: var(--color-surface-hover);
+}
+
 .pc-desktop-only {
   display: none;
 }

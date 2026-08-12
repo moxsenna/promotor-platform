@@ -111,7 +111,7 @@ function DesktopPromotorHome({
             ) : null}
             
             {DEMO_QUEUE_ITEMS.map((item) => (
-              <div key={item.contactId} style={{ padding: "var(--space-5) 0", borderBottom: `1px solid var(--color-border)`, transition: "background 0.2s ease" }} onMouseEnter={(e) => (e.currentTarget.style.background = "var(--color-surface-hover)")}>
+              <div key={item.contactId} className="pc-queue-item" style={{ padding: "var(--space-5) 0", borderBottom: `1px solid var(--color-border)` }}>
                 <div style={{ display: "flex", justifyContent: "space-between", gap: "var(--space-8)" }}>
                   <div style={{ minWidth: 0 }}>
                     <div style={{ fontSize: "var(--font-size-16)", fontWeight: "var(--weight-semibold)" }}>{item.name}</div>
