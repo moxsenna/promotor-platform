@@ -2,6 +2,8 @@
  * Promotor navigation data — shared by PromotorSidebar and PromotorMobileNav.
  * hrefs follow the M0 route set (T10): /app, /app/programs, /app/learners,
  * /app/activity, /app/templates. Product-specific; not a universal nav API.
+ * 
+ * REMEDIATION: Added "Lainnya" as 5th item per PromotorTabBar.dc.html spec.
  */
 
 export type PromotorNavItem = {
@@ -14,6 +16,7 @@ export const PROMOTOR_PRIMARY_NAV: PromotorNavItem[] = [
   { label: "Program", href: "/app/programs" },
   { label: "Peserta", href: "/app/learners" },
   { label: "Aktivitas", href: "/app/activity" },
+  { label: "Lainnya", href: "/app/lainnya" },
 ];
 
 export const PROMOTOR_SECONDARY_NAV: PromotorNavItem[] = [

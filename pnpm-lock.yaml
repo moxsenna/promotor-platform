@@ -51,6 +51,49 @@ importers:
         specifier: ^4.1.10
         version: 4.1.10(@types/node@24.13.3)(vite@8.2.1(@types/node@24.13.3))
 
+  apps/promotor-flow-web:
+    dependencies:
+      '@promotor/contracts':
+        specifier: workspace:*
+        version: link:../../packages/contracts
+      '@promotor/platform-core':
+        specifier: workspace:*
+        version: link:../../packages/platform-core
+      '@promotor/promotor-flow-fixtures':
+        specifier: workspace:*
+        version: link:../../packages/promotor-flow-fixtures
+      lucide-react:
+        specifier: ^0.527.0
+        version: 0.527.0(react@19.2.8)
+      next:
+        specifier: ^16.3.0
+        version: 16.3.0(@types/node@24.13.3)(react-dom@19.2.8(react@19.2.8))(react@19.2.8)
+      react:
+        specifier: ^19.2.0
+        version: 19.2.8
+      react-dom:
+        specifier: ^19.2.0
+        version: 19.2.8(react@19.2.8)
+    devDependencies:
+      '@promotor/config':
+        specifier: workspace:*
+        version: link:../../packages/config
+      '@types/node':
+        specifier: ^24.0.0
+        version: 24.13.3
+      '@types/react':
+        specifier: ^19.2.0
+        version: 19.2.18
+      '@types/react-dom':
+        specifier: ^19.2.0
+        version: 19.2.4(@types/react@19.2.18)
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+      vitest:
+        specifier: ^4.1.10
+        version: 4.1.10(@types/node@24.13.3)(vite@8.2.1(@types/node@24.13.3))
+
   packages/api-client:
     devDependencies:
       typescript:
@@ -96,6 +139,8 @@ importers:
       vitest:
         specifier: ^4.1.10
         version: 4.1.10(@types/node@24.13.3)(vite@8.2.1(@types/node@24.13.3))
+
+  packages/promotor-flow-fixtures: {}
 
 packages:
 
@@ -599,6 +644,11 @@ packages:
   lightningcss@1.33.0:
     resolution: {integrity: sha512-WkUDrojuJs0xkgGf2udWxa3yGBRxPtxUkB79i6aCZLRgc7PM8fZe9TosfPDcvEpQZbuFASnHYmRLBLUbmLOIIA==}
     engines: {node: '>= 12.0.0'}
+
+  lucide-react@0.527.0:
+    resolution: {integrity: sha512-tyqW8gfeeDfpBjZpQ2vv1S6n9OzvkrDcs6pyLJLvB3eyHoz8BNkkR7WbYePlq6ZbNmFA911YJlbTtWkEdvXGgA==}
+    peerDependencies:
+      react: ^16.5.1 || ^17.0.0 || ^18.0.0 || ^19.0.0
 
   magic-string@0.30.21:
     resolution: {integrity: sha512-vd2F4YUyEXKGcLHoq+TEyCjxueSeHnFxyyjNp80yg0XV4vUhnDer/lvvlqM/arB5bXQN5K2/3oinyCRyx8T2CQ==}
@@ -1161,6 +1211,10 @@ snapshots:
       lightningcss-linux-x64-musl: 1.33.0
       lightningcss-win32-arm64-msvc: 1.33.0
       lightningcss-win32-x64-msvc: 1.33.0
+
+  lucide-react@0.527.0(react@19.2.8):
+    dependencies:
+      react: 19.2.8
 
   magic-string@0.30.21:
     dependencies:

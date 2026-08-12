@@ -1,0 +1,17 @@
+- generic [active] [ref=e1]:
+  - main [ref=e3]:
+    - generic [ref=e4]:
+      - heading "Today" [level=1] [ref=e6]
+      - generic [ref=e7]:
+        - heading "Contacts (3)" [level=2] [ref=e8]
+        - list [ref=e9]:
+          - listitem [ref=e10]:
+            - generic [ref=e11]: Ayu Rahma+628121110001
+            - text: Done
+          - listitem [ref=e12]:
+            - generic [ref=e13]: Dimas Prakoso+628121110002
+            - text: Done
+          - listitem [ref=e14]:
+            - generic [ref=e15]: Reni Wulandari+628121110003
+            - text: Done
+  - button "Open Next.js Dev Tools" [ref=e21] [cursor=pointer]

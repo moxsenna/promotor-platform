@@ -1,0 +1,75 @@
+/* Quiet Operations design tokens — PromotorFlow V0.1
+   Values per docs/promotor-flow/design.md §6-§10.
+   Neutral 90% palette, brand accent #167A68.
+   No gradients, no decorative shadows. */
+
+:root {
+  /* Neutral surfaces */
+  --color-canvas: #F7F7F5;
+  --color-surface: #FFFFFF;
+  --color-surface-soft: #F2F2EF;
+  
+  /* Text hierarchy - darker than Class for brand differentiation */
+  --color-text: #191918;
+  --color-text-muted: #71706B;
+  --color-text-faint: #9C9A94;
+  
+  /* Dividers/borders */
+  --color-border: #E8E7E3;
+  --color-border-strong: #D5D3CE;
+  
+  /* Brand accent - PromotorFlow specific (#167A68) */
+  --color-accent: #167A68;
+  --color-accent-soft: #EAF5F2;
+  
+  /* Status colors (meaningful only) */
+  --color-danger: #B42318;
+  --color-warning: #B54708;
+  --color-success: #067647;
+  
+  /* Focus ring */
+  --color-focus-ring: rgba(22, 122, 104, 0.2);
+  --focus-ring-width: 2px;
+  
+  /* Spacing - 4px base unit */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-5: 24px;
+  --space-6: 32px;
+  --space-7: 40px;
+  --space-8: 48px;
+  
+  /* Typography - Mobile-first scale */
+  --font-size-title: 24px;        /* 29px line-height, 650-700 weight */
+  --font-size-section: 12px;      /* 16px line-height, 650 weight */
+  --font-size-primary: 15px;      /* 21px line-height, 550-600 weight */
+  --font-size-body: 14px;         /* 20px line-height, 400 weight */
+  --font-size-secondary: 13px;    /* 18px line-height, 400 weight */
+  --font-size-metadata: 12px;     /* 16px line-height, 450 weight */
+  
+  /* Font weights */
+  --weight-regular: 400;
+  --weight-medium: 550;
+  --weight-semibold: 650;
+  
+  /* Line heights */
+  --leading-heading: 1.21;       /* 29/24 */
+  --leading-body: 1.43;          /* 20/14 */
+  
+  /* Border radius - restrained */
+  --radius-md: 8px;               /* Controls */
+  --radius-lg: 16px;              /* Bottom sheets */
+  
+  /* Layout dimensions */
+  --touch-target: 44px;
+  --page-padding: 16px;
+  --section-gap: 24px;
+  
+  /* Interaction motion */
+  --duration-fast: 180ms;
+  
+  /* Breakpoints */
+  --bp-desktop: 1024px;
+}

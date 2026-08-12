@@ -1,0 +1,24 @@
+- generic [active] [ref=e1]:
+  - main [ref=e3]:
+    - generic [ref=e4]:
+      - generic [ref=e6]:
+        - heading "Today" [level=1] [ref=e7]
+        - paragraph [ref=e8]: Manage your immediate follow-ups
+      - generic [ref=e9]:
+        - heading "Quick Add" [level=2] [ref=e11]
+        - paragraph [ref=e12]: Quick add form coming soon...
+      - generic [ref=e13]:
+        - generic [ref=e14]:
+          - heading "Contacts" [level=2] [ref=e15]
+          - generic [ref=e16]: "3"
+        - list [ref=e17]:
+          - listitem [ref=e18]:
+            - generic [ref=e19]: Ayu Rahma+628121110001
+            - generic [ref=e20]: All caught up
+          - listitem [ref=e21]:
+            - generic [ref=e22]: Dimas Prakoso+628121110002
+            - generic [ref=e23]: All caught up
+          - listitem [ref=e24]:
+            - generic [ref=e25]: Reni Wulandari+628121110003
+            - generic [ref=e26]: All caught up
+  - button "Open Next.js Dev Tools" [ref=e32] [cursor=pointer]

@@ -1,6 +1,11 @@
 /* Quiet Utility design tokens — locked from docs/promotor-class/design.md (§6–§10).
    Values are the design doc's exact palette; do not invent new hues.
-   No gradients, no decorative shadows. */
+   No gradients, no decorative shadows.
+   
+   REMEDIATION NOTICE: Per PromotorClass Mockups v2.dc.html source of truth.
+   - Accent color updated to #167A68 per mockup P0 requirement
+   - Sidebar width set to 200px per desktop mockup spec
+   - Added missing font-size-15, -17 tokens for mobile typography */
 
 :root {
   /* Warm-neutral surfaces */
@@ -18,18 +23,18 @@
   --color-border: #E5E5E1;
   --color-border-dark: #D7D8D3;
 
-  /* Semantic accent — Quiet Utility green */
-  --color-accent: #286344;
-  --color-accent-soft: #E7EFEA;
+  /* Semantic accent — PromotorClass Mockups v2 green (#167A68) */
+  --color-accent: #167A68;
+  --color-accent-soft: #E4EFEB;
 
   /* Status. design.md defines no separate success hue;
      success aliases the accent per Quiet Utility restraint. */
   --color-danger: #A33A32;
   --color-warning: #94662F;
-  --color-success: #286344;
+  --color-success: #167A68;
 
-  /* Focus ring (design.md §6) */
-  --color-focus-ring: rgba(40, 99, 68, 0.2);
+  /* Focus ring (updated for new accent) */
+  --color-focus-ring: rgba(22, 122, 104, 0.2);
   --focus-ring-width: 2px;
 
   /* Spacing scale — design.md §8 */
@@ -68,12 +73,16 @@
   --radius-xl: 10px; /* modal */
 
   /* Layout dimensions */
-  --sidebar-width: 240px;
+  --sidebar-width: 200px; /* Updated per mockup desktop spec */
   --top-bar-height: 56px;
   --touch-target: 44px;
   --container-max: 1200px;
   --container-wide: 1400px;
   --reading-width: 720px; /* design.md §30: 680–740px */
+
+  /* Additional font sizes for mobile typography precision */
+  --font-size-15: 15px;
+  --font-size-17: 17px;
 
   /* Interaction motion — design.md §38: 150–180ms */
   --duration-fast: 150ms;
