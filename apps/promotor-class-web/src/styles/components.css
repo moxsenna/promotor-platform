@@ -459,7 +459,6 @@
   color: var(--color-text-muted);
   margin-top: var(--space-1);
 }
-}
 
 .pc-app-header {
   display: flex;
