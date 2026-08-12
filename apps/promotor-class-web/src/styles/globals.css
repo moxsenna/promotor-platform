@@ -1,0 +1,22 @@
+/* M0.4 scaffold baseline only. Design tokens + full shell styling land in M0.5
+   (src/styles/tokens.css + expanded globals.css). No gradients, no decorative
+   shadows, per Quiet Utility direction. */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  color-scheme: light;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
