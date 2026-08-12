@@ -44,16 +44,17 @@ export default function RegistrationFormClient({
         return;
       }
 
-      // Match or create contact (M0: cast to bypass BRAND checks for demo)
+      // Match or create contact (T11 FIX: now type-safe with PUBLIC_LANDING source)
       const contactResult = matchOrCreateContact({
         organizationId,
         name: name.trim(),
         phone: normalizedPhone,
         email: email.trim() || undefined,
         source: "PUBLIC_LANDING",
-      } as any);
+      });
 
-      // Enroll contact in program (M0: cast to bypass BRAND/source checks for demo)
+      // Enroll contact in program (M0: cast required because EnrollContactInput requires branded IDs per contracts; 
+      // MockStateStore uses plain string IDs — T11 finding: type safety compromise accepted for M0 demo path)
       const enrollmentRef = enrollContact({
         organizationId,
         contactId: contactResult.contact.id,

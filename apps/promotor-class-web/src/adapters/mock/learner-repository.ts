@@ -22,13 +22,24 @@ import { brandId, nextSequentialId } from "./next-id";
  * phone reuses the canonical contact_id — one person, one contact.
  */
 
+/**
+ * Contact registration sources (INTEGRATION_CONTRACT §7).
+ * M0: these are string literals used in demo state — no contracts schema exists yet.
+ */
+type ContactSourceLabel =
+  | "instagram"
+  | "google_maps"
+  | "referral"
+  | "parenting_seminar"
+  | "PUBLIC_LANDING"; // T11 FIX: new source for public program landing pages
+
 export interface MatchOrCreateContactInput {
   organizationId: string;
   name: string;
   /** Any Indonesian variant ("0812...", "62812...", "+62 812-..."). */
   phone: string;
   email?: string;
-  source: string;
+  source: ContactSourceLabel;
 }
 
 export interface MatchOrCreateContactResult {

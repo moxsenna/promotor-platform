@@ -1,4 +1,4 @@
-import { getProgramById } from "@/modules/programs/queries";
+import { getProgramBySlug } from "@/modules/programs/queries";
 import { Container, SectionHeader, TextLink, Stack, Divider } from "@/components/foundation";
 import RegistrationFormClient from "./page-client";
 import { getWorkspace } from "@/modules/organizations/queries";
@@ -25,16 +25,10 @@ export default async function PublicProgramPage({ params }: PublicProgramPagePro
   // Get workspace identity (promotor name/headline/city/instagram) via module query layer
   const workspace = getWorkspace();
   
-  // Find program by slug (fixtures use prog_01's slug for "7-hari-mengenal-cara-belajar-anak")
-  const PROGRAM_SLUGS: Record<string, string> = {
-    "7-hari-mengenal-cara-belajar-anak": "prog_01",
-    "30-hari-setelah-tes": "prog_02",
-    "parenting-growth-program": "prog_03",
-    "7-hari-memahami-potensi-remaja": "prog_04",
-  };
-
-  const programId = PROGRAM_SLUGS[programSlug];
-  if (!programId) {
+  // Find program by slug (uses T12 FIX: module query abstraction instead of hardcoding)
+  const program = getProgramBySlug(programSlug);
+  
+  if (!program) {
     return (
       <div className="pc-page-frame">
         <Container size="narrow">
@@ -48,8 +42,6 @@ export default async function PublicProgramPage({ params }: PublicProgramPagePro
       </div>
     );
   }
-
-  const program = getProgramById(programId);
   if (!program) {
     return (
       <div className="pc-page-frame">
@@ -67,6 +59,9 @@ export default async function PublicProgramPage({ params }: PublicProgramPagePro
   // Get curriculum preview (first module only, first 3 lessons)
   const modulesPreview = [];
   const lessonsPreview: { moduleId: string; lessonId: string; title: string; type: string }[] = [];
+  
+  // Extract programId from program object (T11 FIX: use resolved program instead of slug mapping)
+  const programId = program.id;
 
   // For demo path B, we only show prog_01's first module as curriculum preview
   try {
