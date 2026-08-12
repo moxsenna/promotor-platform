@@ -39,8 +39,11 @@
 
   /* Spacing scale — design.md §8 */
   --space-1: 4px;
+  --space-1_5: 6px;
   --space-2: 8px;
+  --space-2_5: 10px;
   --space-3: 12px;
+  --space-3_5: 14px;
   --space-4: 16px;
   --space-5: 24px;
   --space-6: 32px;
@@ -50,8 +53,11 @@
   /* Type scale — promotor/admin (design.md §7) */
   --font-size-12: 12px;
   --font-size-13: 13px;
+  --font-size-13_5: 13.5px;
   --font-size-14: 14px;
+  --font-size-15: 15px;
   --font-size-16: 16px;
+  --font-size-17: 17px;
   --font-size-18: 18px;
   --font-size-20: 20px;
   --font-size-28: 28px;
