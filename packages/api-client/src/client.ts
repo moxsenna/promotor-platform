@@ -19,7 +19,7 @@ export class ApiClient {
   readonly config: ApiClientConfig;
 
   constructor(config: ApiClientConfig) {
-    if (config.baseUrl.length === 0) {
+    if (config.baseUrl.trim().length === 0) {
       throw new ApiClientError("ApiClient requires a non-empty baseUrl");
     }
     this.config = config;

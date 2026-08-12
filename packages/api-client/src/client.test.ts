@@ -14,6 +14,10 @@ describe("ApiClient", () => {
     expect(() => new ApiClient({ baseUrl: "" })).toThrow(ApiClientError);
   });
 
+  it("rejects a whitespace-only baseUrl", () => {
+    expect(() => new ApiClient({ baseUrl: "   " })).toThrow(ApiClientError);
+  });
+
   it("keeps the optional access-token provider", () => {
     const getAccessToken = async () => "token";
     const client = new ApiClient({ baseUrl: "https://api.example.com", getAccessToken });
