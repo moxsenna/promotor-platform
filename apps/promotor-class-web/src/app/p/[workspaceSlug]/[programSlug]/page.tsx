@@ -1,16 +1,11 @@
 import { getProgramById } from "@/modules/programs/queries";
 import { Container, SectionHeader, TextLink, Stack, Divider } from "@/components/foundation";
 import RegistrationFormClient from "./page-client";
-import type { PromotorPublicProfile } from "@promotor/promotor-class-fixtures";
-import { organization, promotorUser, promotorPublicProfile } from "@promotor/promotor-class-fixtures";
+import { getWorkspace } from "@/modules/organizations/queries";
 
 type PublicProgramPageProps = {
   params: Promise<{ workspaceSlug: string; programSlug: string }>;
 };
-
-// Hardcoded org identity per fixtures (T9 seed)
-const ORG_ID = organization.id;
-const PROMOTOR_PROFILE: PromotorPublicProfile = promotorPublicProfile;
 
 /**
  * Public program landing + registration (design.md §51 screen 15).
@@ -27,6 +22,9 @@ const PROMOTOR_PROFILE: PromotorPublicProfile = promotorPublicProfile;
 export default async function PublicProgramPage({ params }: PublicProgramPageProps) {
   const { programSlug } = await params;
 
+  // Get workspace identity (promotor name/headline/city/instagram) via module query layer
+  const workspace = getWorkspace();
+  
   // Find program by slug (fixtures use prog_01's slug for "7-hari-mengenal-cara-belajar-anak")
   const PROGRAM_SLUGS: Record<string, string> = {
     "7-hari-mengenal-cara-belajar-anak": "prog_01",
@@ -112,10 +110,10 @@ export default async function PublicProgramPage({ params }: PublicProgramPagePro
           <section className="pc-public-promotor">
             <h2 className="pc-public-promotor-title">Dari</h2>
             <div className="pc-public-promotor-card">
-              <div className="pc-public-promotor-name">{PROMOTOR_PROFILE.name}</div>
-              <div className="pc-public-promotor-role">{PROMOTOR_PROFILE.headline}</div>
+              <div className="pc-public-promotor-name">{workspace.promotorPublicProfile.name}</div>
+              <div className="pc-public-promotor-role">{workspace.promotorPublicProfile.headline}</div>
               <div className="pc-public-promotor-org">
-                dari {organization.name}
+                dari {workspace.organization.name}
               </div>
             </div>
           </section>
@@ -148,7 +146,7 @@ export default async function PublicProgramPage({ params }: PublicProgramPagePro
               Isi nama dan nomor telepon untuk memulai belajar. Kami akan menghubungi Anda melalui WhatsApp jika diperlukan.
             </p>
             <RegistrationFormClient
-              organizationId={ORG_ID}
+              organizationId={workspace.organization.id}
               programId={programId}
               programTitle={program.title}
             />
