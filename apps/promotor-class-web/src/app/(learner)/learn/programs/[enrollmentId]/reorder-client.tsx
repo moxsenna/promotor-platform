@@ -15,8 +15,10 @@ export default function ReorderClient({ initialOrder, onOrderChange }: ReorderCl
   const moveUp = (index: number) => {
     if (index === 0) return;
     const newIndex = index - 1;
-    const newOrder = [...currentOrder];
-    [newOrder[index], newOrder[newIndex]] = [newOrder[newIndex], newOrder[index]];
+    const newOrder: string[] = [...currentOrder];
+    const temp = newOrder[newIndex]!;
+    newOrder[newIndex] = newOrder[index]!;
+    newOrder[index] = temp;
     setCurrentOrder(newOrder);
     onOrderChange(newOrder);
   };
@@ -24,8 +26,10 @@ export default function ReorderClient({ initialOrder, onOrderChange }: ReorderCl
   const moveDown = (index: number) => {
     if (index === currentOrder.length - 1) return;
     const newIndex = index + 1;
-    const newOrder = [...currentOrder];
-    [newOrder[index], newOrder[newIndex]] = [newOrder[newIndex], newOrder[index]];
+    const newOrder: string[] = [...currentOrder];
+    const temp = newOrder[newIndex]!;
+    newOrder[newIndex] = newOrder[index]!;
+    newOrder[index] = temp;
     setCurrentOrder(newOrder);
     onOrderChange(newOrder);
   };
