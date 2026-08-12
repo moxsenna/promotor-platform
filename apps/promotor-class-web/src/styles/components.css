@@ -439,6 +439,49 @@
   gap: 2px;
 }
 
+.pc-app-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-4);
+}
+
+.pc-progress-indicator {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-2);
+  text-align: right;
+}
+
+.pc-progress-value {
+  font-size: var(--font-size-18);
+  font-weight: var(--weight-semibold);
+  color: var(--color-accent);
+}
+
+.pc-progress-label {
+  font-size: var(--font-size-13);
+  color: var(--color-text-muted);
+  line-height: var(--leading-body);
+}
+
+.pc-list-more-link {
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--color-border);
+  text-align: center;
+}
+
+.pc-list-more-link span {
+  font-size: var(--font-size-14);
+  color: var(--color-accent);
+  cursor: pointer;
+}
+
+.pc-meta--muted {
+  color: var(--color-text-muted);
+  margin-top: var(--space-2);
+}
+
 .pc-nav-row {
   display: flex;
   align-items: center;
@@ -1234,4 +1277,63 @@ a.pc-sheet-row:hover {
   .pc-public-container {
     padding-inline: var(--space-5);
   }
+}
+
+/* ---------- Empty states & skeletons (design.md §35) ---------- */
+
+.pc-empty-state {
+  text-align: center;
+  padding-block: var(--space-8);
+}
+
+.pc-empty-title {
+  font-size: var(--font-size-17);
+  font-weight: var(--weight-semibold);
+  margin: 0;
+  color: var(--color-text);
+}
+
+.pc-empty-desc {
+  font-size: var(--font-size-14);
+  color: var(--color-text-muted);
+  line-height: var(--leading-body);
+  margin-top: var(--space-2);
+}
+
+.pc-skeleton {
+  background: linear-gradient(90deg, var(--color-surface-soft) 8%, var(--color-surface) 18%, var(--color-surface-soft) 33%);
+  background-size: 1000px 100%;
+  animation: pc-shimmer 1.6s infinite;
+  border-radius: var(--radius-sm);
+}
+
+@keyframes pc-shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+.pc-skeleton--text {
+  height: var(--height-md);
+  margin-bottom: var(--space-2);
+}
+
+.pc-skeleton--text--lg { height: var(--height-lg); width: 60%; }
+.pc-skeleton--text--md { height: var(--height-md); width: 80%; }
+.pc-skeleton--text--sm { height: var(--height-sm); width: 40%; }
+.pc-skeleton--text--wide { width: 100%; }
+.pc-skeleton--text--narrow { width: 50%; }
+
+.pc-list-skeleton-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+  padding: var(--space-4);
+  border-bottom: 1px solid var(--color-border);
+}
+
+.pc-card-skeleton {
+  padding: var(--space-4);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  margin-bottom: var(--space-4);
 }

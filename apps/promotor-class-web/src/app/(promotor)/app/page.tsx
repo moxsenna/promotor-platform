@@ -48,12 +48,20 @@ export default function PromotorHomePage() {
   const queue = [...byContact.values()];
 
   return (
-    <Container>
+    <Container size="wide">
       <Stack gap="8">
-        <PageHeader
-          title="Beranda"
-          description="Peserta dan aktivitas yang membutuhkan perhatian."
-        />
+        {/* Header with date and progress indicator (Turn 4a mockup) */}
+        <div className="pc-app-header">
+          <div>
+            <h1 className="pc-page-title">Beranda</h1>
+            <p className="pc-meta pc-meta--muted">Selasa, 11 Agu</p>
+          </div>
+          <div className="pc-progress-indicator">
+            <span className="pc-progress-value">67%</span>
+            <span className="pc-progress-label">rata-rata selesai</span>
+          </div>
+        </div>
+        
         <Divider />
         <Stack gap="2">
           <SectionHeader
@@ -69,7 +77,16 @@ export default function PromotorHomePage() {
               description="Sinyal belajar peserta akan muncul di sini ketika peserta mulai mengerjakan program."
             />
           ) : (
-            queue.map((row) => <SignalRow key={row.signal.contactId} row={row} />)
+            <>
+              {queue.slice(0, 4).map((row) => (
+                <SignalRow key={row.signal.contactId} row={row} />
+              ))}
+              {queue.length > 4 && (
+                <div className="pc-list-more-link">
+                  <span>Lihat {queue.length - 4} lainnya</span>
+                </div>
+              )}
+            </>
           )}
         </Stack>
         <Divider />
@@ -108,6 +125,11 @@ function SignalRow({ row }: { row: PromotorHomeSignalView }) {
         <p>{signal.reason}</p>
         <p className="pc-meta">Langkah berikutnya</p>
         <p>{signalNextStep(signal.signalType)}</p>
+        <div className="pc-list-actions">
+          <TextLink href={`/app/learners/${signal.contactId}`}>
+            Tindak lanjuti →
+          </TextLink>
+        </div>
       </Stack>
     </div>
   );

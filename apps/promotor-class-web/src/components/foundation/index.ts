@@ -11,3 +11,4 @@ export { Stack, Inline, type SpaceToken } from "./stack";
 export { StatusText } from "./status-text";
 export { Textarea } from "./textarea";
 export { TextLink } from "./text-link";
+export * from "./skeleton";
