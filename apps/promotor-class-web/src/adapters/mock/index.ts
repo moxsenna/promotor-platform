@@ -9,4 +9,11 @@
  * Screens must NEVER import fixtures directly — all fixture access goes
  * through these adapters.
  */
-export {};
+export * from "./mock-state-store";
+export * from "./seed-state";
+export * from "./scenario";
+export * from "./next-id";
+export * from "./program-repository";
+export * from "./learner-repository";
+export * from "./learning-service";
+export * from "./promotorflow-adapter";

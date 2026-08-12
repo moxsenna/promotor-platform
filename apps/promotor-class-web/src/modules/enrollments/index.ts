@@ -7,4 +7,6 @@
  * M0.6 mock adapter adds enrollment queries and the acquisition mutation
  * (public registration creates enrollment) here.
  */
-export {};
+export * from "./ports";
+export * from "./queries";
+export * from "./commands";

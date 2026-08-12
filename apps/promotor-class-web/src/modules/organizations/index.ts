@@ -6,4 +6,5 @@
  *
  * M0.6 mock adapter adds the workspace query port (org "Rina Learning Studio", slug "rina").
  */
-export {};
+export * from "./ports";
+export * from "./queries";

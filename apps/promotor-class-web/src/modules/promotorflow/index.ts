@@ -8,4 +8,6 @@
  * M0 lifecycle: create/request only, show reference, "Open in PromotorFlow".
  * completeNextAction / rescheduleNextAction are forbidden in M0.
  */
-export {};
+export * from "./ports";
+export * from "./queries";
+export * from "./commands";

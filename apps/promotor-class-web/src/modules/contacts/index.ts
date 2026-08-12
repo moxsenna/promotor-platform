@@ -7,4 +7,6 @@
  *
  * M0.6 mock adapter adds the contact query/mutation port here.
  */
-export {};
+export * from "./ports";
+export * from "./queries";
+export * from "./commands";

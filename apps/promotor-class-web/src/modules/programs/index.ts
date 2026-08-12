@@ -6,4 +6,5 @@
  *
  * M0.6 mock adapter adds program queries (catalog, detail, curriculum) here.
  */
-export {};
+export * from "./ports";
+export * from "./queries";
