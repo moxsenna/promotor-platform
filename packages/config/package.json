@@ -1,0 +1,15 @@
+{
+  "name": "@promotor/config",
+  "version": "0.1.0",
+  "description": "Shared dependency-free TypeScript / ESLint / Prettier base configs for the Promotor platform (spec §6.5). Plain config files consumed by path, e.g. @promotor/config/typescript/base.json. No CSS tooling.",
+  "exports": {
+    "./typescript/*": "./typescript/*",
+    "./eslint/*": "./eslint/*",
+    "./prettier/*": "./prettier/*"
+  },
+  "files": [
+    "typescript",
+    "eslint",
+    "prettier"
+  ]
+}
