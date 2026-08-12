@@ -72,6 +72,7 @@
   --top-bar-height: 56px;
   --touch-target: 44px;
   --container-max: 1200px;
+  --container-wide: 1400px;
   --reading-width: 720px; /* design.md §30: 680–740px */
 
   /* Interaction motion — design.md §38: 150–180ms */
