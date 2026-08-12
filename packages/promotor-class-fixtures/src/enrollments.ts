@@ -63,7 +63,7 @@ export const enrollments = [
     id: "enr_04",
     organizationId: "org_001",
     programId: "prog_01",
-    contactId: "contact_004", // Nadia Putri — at risk, last activity 7 days ago
+    contactId: "contact_004", // Nadia Putri — at risk, last activity 5 days ago
     status: "started",
     progressPercent: 14,
     intentScore: 34,
