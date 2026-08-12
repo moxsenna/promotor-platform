@@ -1,0 +1,25 @@
+{
+  "name": "@promotor/promotor-class-fixtures",
+  "version": "0.1.0",
+  "description": "Static deterministic demo seed data for the Promotor platform M0 (workspace, promotor, learners, programs, enrollments, learning events, signals, activities, templates). Consumed from source by workspace apps; no emit/build in M0.",
+  "type": "module",
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "files": [
+    "src"
+  ],
+  "scripts": {
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@promotor/contracts": "workspace:*"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vitest": "^4.1.10"
+  }
+}

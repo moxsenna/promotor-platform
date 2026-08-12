@@ -41,6 +41,19 @@ importers:
         specifier: ^4.1.10
         version: 4.1.10(vite@8.2.1)
 
+  packages/promotor-class-fixtures:
+    dependencies:
+      '@promotor/contracts':
+        specifier: workspace:*
+        version: link:../contracts
+    devDependencies:
+      typescript:
+        specifier: ^5.9.3
+        version: 5.9.3
+      vitest:
+        specifier: ^4.1.10
+        version: 4.1.10(vite@8.2.1)
+
 packages:
 
   '@jridgewell/sourcemap-codec@1.5.5':
