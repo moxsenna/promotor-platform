@@ -100,6 +100,22 @@ describe("enrollment fixtures parse against contracts", () => {
       expect(lessonIds.has(progress.lessonId)).toBe(true);
     }
   });
+
+  it("lesson.completed event timestamps agree with lesson-progress rows", () => {
+    for (const progress of lessonProgress) {
+      if (progress.completedAt === null) continue;
+      const event = learningEvents.find((e) => {
+        if (e.eventType !== "lesson.completed") return false;
+        if (!("subject" in e) || e.subject === undefined) return false;
+        return (
+          e.subject.enrollmentId === progress.enrollmentId &&
+          e.subject.lessonId === progress.lessonId
+        );
+      });
+      expect(event, `completed event for ${progress.lessonId}`).toBeDefined();
+      expect(event!.occurredAt).toBe(progress.completedAt);
+    }
+  });
 });
 
 describe("learning event fixtures parse against contracts", () => {
@@ -117,6 +133,23 @@ describe("learning event fixtures parse against contracts", () => {
     for (const event of learningEvents) {
       expect(Number.isNaN(Date.parse(event.occurredAt))).toBe(false);
       expect(event.occurredAt.endsWith("Z")).toBe(true);
+    }
+  });
+
+  it("events are ordered chronologically within each learner", () => {
+    const byContact = new Map<string, typeof learningEvents>();
+    for (const event of learningEvents) {
+      const list = byContact.get(event.contactId);
+      if (list) list.push(event);
+      else byContact.set(event.contactId, [event]);
+    }
+    for (const list of byContact.values()) {
+      for (let i = 1; i < list.length; i++) {
+        expect(
+          Date.parse(list[i]!.occurredAt),
+          `learner ${list[0]!.contactId} at index ${i}`
+        ).toBeGreaterThanOrEqual(Date.parse(list[i - 1]!.occurredAt));
+      }
     }
   });
 });

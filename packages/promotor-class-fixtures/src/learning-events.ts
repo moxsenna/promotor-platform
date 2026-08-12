@@ -3,50 +3,21 @@ import { LearningEventEnvelopeSchema } from "@promotor/contracts";
 /**
  * Append-only learning events (INTEGRATION_CONTRACT §18/§19; event names are
  * contracts). Static seeds for the demo timeline. One sequence per learner,
- * chronological within learner. Event ids evt_001..evt_054.
+ * chronological within learner (timestamps non-decreasing — enforced by the
+ * test suite). Event ids evt_001..evt_054.
  *
  * Demo-path relevance:
  * - Ayu: ... → program.completed (evt_020) → PROGRAM_COMPLETED signal.
  * - Dimas: cta.clicked (evt_048) → HIGH_INTENT_CTA signal.
  * - Nadia: learner.inactive (evt_035) → AT_RISK signal.
+ *
+ * lesson.started coverage convention: started/ completed pairs are emitted
+ * for Ayu's full journey; other learners only get lesson.started for the
+ * lesson currently in progress (Nina les_007, Hendra les_023). Timeline
+ * renderers must NOT assume a started event precedes every completed event.
  */
 
 const ORG = "org_001";
-
-/** [startEventId, completeEventId, lessonId, date] per completed lesson. */
-const ayuLessonPairs: [string, string, string, string][] = [
-  ["evt_003", "evt_004", "les_001", "2026-08-02"],
-  ["evt_005", "evt_006", "les_002", "2026-08-03"],
-  ["evt_007", "evt_008", "les_003", "2026-08-04"],
-  ["evt_009", "evt_010", "les_004", "2026-08-05"],
-  ["evt_011", "evt_012", "les_005", "2026-08-06"],
-  ["evt_013", "evt_014", "les_006", "2026-08-07"],
-];
-
-/** [eventId, lessonId, date] per completed lesson. */
-const ninaLessonPairs: [string, string, string][] = [
-  ["evt_023", "les_001", "2026-08-02"],
-  ["evt_024", "les_002", "2026-08-03"],
-  ["evt_025", "les_003", "2026-08-04"],
-  ["evt_026", "les_004", "2026-08-05"],
-  ["evt_027", "les_005", "2026-08-06"],
-  ["evt_028", "les_006", "2026-08-07"],
-];
-
-const dimasLessonPairs: [string, string, string][] = [
-  ["evt_038", "les_008", "2026-05-11"],
-  ["evt_039", "les_009", "2026-05-12"],
-  ["evt_040", "les_010", "2026-05-13"],
-  ["evt_041", "les_011", "2026-05-14"],
-  ["evt_042", "les_012", "2026-05-15"],
-  ["evt_043", "les_013", "2026-05-16"],
-];
-
-const hendraLessonPairs: [string, string, string][] = [
-  ["evt_051", "les_020", "2026-07-21"],
-  ["evt_052", "les_021", "2026-07-22"],
-  ["evt_053", "les_022", "2026-07-23"],
-];
 
 const registered = (
   eventId: string,
@@ -81,6 +52,7 @@ const enrolled = (
   payload: {},
 });
 
+/** Lesson completions land at 07:40 UTC (matches lesson-progress rows). */
 const completedLesson = (
   eventId: string,
   contactId: string,
@@ -160,10 +132,20 @@ export const learningEvents = [
   // ── Ayu Rahma (contact_001, enr_01, prog_01) — full journey 08-01..08-08
   registered("evt_001", "contact_001", "2026-08-01T07:30:00.000Z"),
   enrolled("evt_002", "contact_001", "prog_01", "enr_01", "2026-08-01T08:00:00.000Z"),
-  ...ayuLessonPairs.flatMap(([startId, completeId, lessonId, date]) => [
-    startedLesson(startId, "contact_001", "enr_01", "prog_01", lessonId, `${date}T07:00:00.000Z`),
-    completedLesson(completeId, "contact_001", "enr_01", "prog_01", lessonId, date),
-  ]),
+  startedLesson("evt_003", "contact_001", "enr_01", "prog_01", "les_001", "2026-08-02T07:00:00.000Z"),
+  completedLesson("evt_004", "contact_001", "enr_01", "prog_01", "les_001", "2026-08-02"),
+  startedLesson("evt_005", "contact_001", "enr_01", "prog_01", "les_002", "2026-08-03T07:00:00.000Z"),
+  completedLesson("evt_006", "contact_001", "enr_01", "prog_01", "les_002", "2026-08-03"),
+  startedLesson("evt_007", "contact_001", "enr_01", "prog_01", "les_003", "2026-08-04T07:00:00.000Z"),
+  completedLesson("evt_008", "contact_001", "enr_01", "prog_01", "les_003", "2026-08-04"),
+  startedLesson("evt_009", "contact_001", "enr_01", "prog_01", "les_004", "2026-08-05T07:00:00.000Z"),
+  completedLesson("evt_010", "contact_001", "enr_01", "prog_01", "les_004", "2026-08-05"),
+  progressEvent("evt_018", "contact_001", "enr_01", "prog_01", "program.progress_50", "2026-08-05T08:10:00.000Z"),
+  startedLesson("evt_011", "contact_001", "enr_01", "prog_01", "les_005", "2026-08-06T07:00:00.000Z"),
+  completedLesson("evt_012", "contact_001", "enr_01", "prog_01", "les_005", "2026-08-06"),
+  startedLesson("evt_013", "contact_001", "enr_01", "prog_01", "les_006", "2026-08-07T07:00:00.000Z"),
+  completedLesson("evt_014", "contact_001", "enr_01", "prog_01", "les_006", "2026-08-07"),
+  progressEvent("evt_019", "contact_001", "enr_01", "prog_01", "program.progress_80", "2026-08-07T08:10:00.000Z"),
   startedLesson("evt_015", "contact_001", "enr_01", "prog_01", "les_007", "2026-08-08T07:00:00.000Z"),
   completedLesson("evt_016", "contact_001", "enr_01", "prog_01", "les_007", "2026-08-08"),
   {
@@ -177,17 +159,18 @@ export const learningEvents = [
     subject: { programId: "prog_01", enrollmentId: "enr_01", lessonId: "les_007" },
     payload: { lessonId: "les_007", programId: "prog_01" },
   },
-  progressEvent("evt_018", "contact_001", "enr_01", "prog_01", "program.progress_50", "2026-08-05T08:10:00.000Z"),
-  progressEvent("evt_019", "contact_001", "enr_01", "prog_01", "program.progress_80", "2026-08-07T08:10:00.000Z"),
   programCompleted("evt_020", "contact_001", "enr_01", "prog_01", "2026-08-08T08:20:00.000Z"),
 
   // ── Nina Wulandari (contact_002, enr_02, prog_01) — 6/7 days, day 7 in progress
   registered("evt_021", "contact_002", "2026-08-01T07:45:00.000Z"),
   enrolled("evt_022", "contact_002", "prog_01", "enr_02", "2026-08-01T08:00:00.000Z"),
-  ...ninaLessonPairs.map(([eventId, lessonId, date]) =>
-    completedLesson(eventId, "contact_002", "enr_02", "prog_01", lessonId, date)
-  ),
+  completedLesson("evt_023", "contact_002", "enr_02", "prog_01", "les_001", "2026-08-02"),
+  completedLesson("evt_024", "contact_002", "enr_02", "prog_01", "les_002", "2026-08-03"),
+  completedLesson("evt_025", "contact_002", "enr_02", "prog_01", "les_003", "2026-08-04"),
+  completedLesson("evt_026", "contact_002", "enr_02", "prog_01", "les_004", "2026-08-05"),
   progressEvent("evt_029", "contact_002", "enr_02", "prog_01", "program.progress_50", "2026-08-05T08:10:00.000Z"),
+  completedLesson("evt_027", "contact_002", "enr_02", "prog_01", "les_005", "2026-08-06"),
+  completedLesson("evt_028", "contact_002", "enr_02", "prog_01", "les_006", "2026-08-07"),
   progressEvent("evt_030", "contact_002", "enr_02", "prog_01", "program.progress_80", "2026-08-07T08:10:00.000Z"),
   startedLesson("evt_031", "contact_002", "enr_02", "prog_01", "les_007", "2026-08-11T06:30:00.000Z"),
 
@@ -210,11 +193,14 @@ export const learningEvents = [
   // ── Dimas Pratama (contact_003, enr_03, prog_02) — completed + CTA clicked
   registered("evt_036", "contact_003", "2026-05-10T07:00:00.000Z"),
   enrolled("evt_037", "contact_003", "prog_02", "enr_03", "2026-05-10T08:00:00.000Z"),
-  ...dimasLessonPairs.map(([eventId, lessonId, date]) =>
-    completedLesson(eventId, "contact_003", "enr_03", "prog_02", lessonId, date)
-  ),
+  completedLesson("evt_038", "contact_003", "enr_03", "prog_02", "les_008", "2026-05-11"),
+  completedLesson("evt_039", "contact_003", "enr_03", "prog_02", "les_009", "2026-05-12"),
+  completedLesson("evt_040", "contact_003", "enr_03", "prog_02", "les_010", "2026-05-13"),
   progressEvent("evt_044", "contact_003", "enr_03", "prog_02", "program.progress_50", "2026-05-13T08:15:00.000Z"),
+  completedLesson("evt_041", "contact_003", "enr_03", "prog_02", "les_011", "2026-05-14"),
+  completedLesson("evt_042", "contact_003", "enr_03", "prog_02", "les_012", "2026-05-15"),
   progressEvent("evt_045", "contact_003", "enr_03", "prog_02", "program.progress_80", "2026-05-15T08:15:00.000Z"),
+  completedLesson("evt_043", "contact_003", "enr_03", "prog_02", "les_013", "2026-05-16"),
   programCompleted("evt_046", "contact_003", "enr_03", "prog_02", "2026-05-16T08:15:00.000Z"),
   {
     schemaVersion: 1,
@@ -242,9 +228,9 @@ export const learningEvents = [
   // ── Hendra Saputra (contact_005, enr_05, prog_04) — active, 3/7 lessons done
   registered("evt_049", "contact_005", "2026-07-20T07:00:00.000Z"),
   enrolled("evt_050", "contact_005", "prog_04", "enr_05", "2026-07-20T08:00:00.000Z"),
-  ...hendraLessonPairs.map(([eventId, lessonId, date]) =>
-    completedLesson(eventId, "contact_005", "enr_05", "prog_04", lessonId, date)
-  ),
+  completedLesson("evt_051", "contact_005", "enr_05", "prog_04", "les_020", "2026-07-21"),
+  completedLesson("evt_052", "contact_005", "enr_05", "prog_04", "les_021", "2026-07-22"),
+  completedLesson("evt_053", "contact_005", "enr_05", "prog_04", "les_022", "2026-07-23"),
   startedLesson("evt_054", "contact_005", "enr_05", "prog_04", "les_023", "2026-08-10T06:45:00.000Z"),
 ];
 

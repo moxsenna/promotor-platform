@@ -80,7 +80,7 @@ export const learningSignals = [
     intentLabel: "cold",
     severity: "HIGH",
     priority: 60,
-    reason: "Nadia tidak ada aktivitas 7 hari, progress baru 14% — kirim pengingat yang ramah.",
+    reason: "Nadia tidak ada aktivitas 5 hari, progress baru 14% — kirim pengingat yang ramah.",
     status: "ACTIVE",
     createdAt: "2026-08-10T09:05:00.000Z",
   },

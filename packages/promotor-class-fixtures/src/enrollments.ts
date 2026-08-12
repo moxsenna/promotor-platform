@@ -92,6 +92,8 @@ export const enrollments = [
 /**
  * Per-lesson progress. status is derived (completed when completedAt set,
  * in_progress when only startedAt set) — no contracts schema yet.
+ * Completed lessons land at 07:40 UTC, matching the lesson.completed event
+ * timestamps in ./learning-events.ts.
  */
 export interface LessonProgress {
   enrollmentId: string;
@@ -119,7 +121,7 @@ export const lessonProgress: LessonProgress[] = [
     contactId: "contact_001",
     lessonId: "les_007",
     startedAt: "2026-08-08T07:00:00.000Z",
-    completedAt: "2026-08-08T07:50:00.000Z",
+    completedAt: "2026-08-08T07:40:00.000Z",
   },
   // Nina — prog_01, 6 days completed, day 7 in progress
   ...["les_001", "les_002", "les_003", "les_004", "les_005", "les_006"].map((lessonId, i) => {
@@ -146,7 +148,7 @@ export const lessonProgress: LessonProgress[] = [
     contactId: "contact_004",
     lessonId: "les_001",
     startedAt: "2026-08-04T09:00:00.000Z",
-    completedAt: "2026-08-05T09:20:00.000Z",
+    completedAt: "2026-08-05T07:40:00.000Z",
   },
   // Dimas — prog_02, all 6 lessons completed
   ...["les_008", "les_009", "les_010", "les_011", "les_012", "les_013"].map((lessonId, i) => {
@@ -157,7 +159,7 @@ export const lessonProgress: LessonProgress[] = [
       contactId: "contact_003",
       lessonId,
       startedAt: `${date}T07:00:00.000Z`,
-      completedAt: `${date}T07:45:00.000Z`,
+      completedAt: `${date}T07:40:00.000Z`,
     };
   }),
   // Hendra — prog_04, 3 lessons done, lesson 4 in progress
@@ -169,7 +171,7 @@ export const lessonProgress: LessonProgress[] = [
       contactId: "contact_005",
       lessonId,
       startedAt: `${date}T07:30:00.000Z`,
-      completedAt: `${date}T08:00:00.000Z`,
+      completedAt: `${date}T07:40:00.000Z`,
     };
   }),
   {

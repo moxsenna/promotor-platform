@@ -43,7 +43,7 @@ export const learningActivities = [
     source: "PROMOTORCLASS",
     sourceEventId: "evt_035", // Nadia — learner.inactive
     eventType: "LEARNER_INACTIVE",
-    summary: "Nadia tidak aktif 7 hari (progress 14%) — perlu pengingat ramah.",
+    summary: "Nadia tidak aktif 5 hari (progress 14%) — perlu pengingat ramah.",
     context: {
       programId: "prog_01",
       programTitle: "7 Hari Mengenal Cara Belajar Anak",
