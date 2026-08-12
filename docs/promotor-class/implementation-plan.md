@@ -1,4 +1,10 @@
 # PromotorClass V0.1 — Implementation Plan
+> ## Platform monorepo mapping — supersedes generic `src/` paths below (2026-08-12)
+>
+> This plan predates the platform monorepo restructure. Read every `src/...` path below as `apps/promotor-class-web/src/...`. Example: `src/styles/tokens.css` → `apps/promotor-class-web/src/styles/tokens.css`; `src/app/...` → `apps/promotor-class-web/src/app/...`.
+>
+> M0 scope pointer: execution is governed by the locked M0 plan at `docs/superpowers/plans/2026-08-12-promotorclass-m0-frontend-plan.md` (architecture baseline: `docs/superpowers/specs/2026-08-12-promotorclass-frontend-monorepo-design.md`). This document remains the V0.1 product-level plan; where it conflicts with the locked M0 plan, the M0 plan wins.
+
 ## Detailed, Structured, Execution-Ready
 
 **Product:** PromotorClass  

@@ -1,4 +1,26 @@
 # PromotorClass V0.1 — Architecture
+> ## Platform monorepo mapping — supersedes generic `src/` paths below (2026-08-12)
+>
+> PromotorClass is now one app inside the Promotor platform monorepo. Locked baseline: `docs/superpowers/specs/2026-08-12-promotorclass-frontend-monorepo-design.md`; M0 scope: `docs/superpowers/plans/2026-08-12-promotorclass-m0-frontend-plan.md`.
+>
+> **Path mapping.** Every generic `src/...` reference below means `apps/promotor-class-web/src/...` (e.g. `src/styles/tokens.css` → `apps/promotor-class-web/src/styles/tokens.css`).
+>
+> **Platform topology.** Root package: `apps/promotor-class-web` (Next.js app). Shared packages: `packages/contracts`, `packages/platform-core`, `packages/api-client`, `packages/promotor-class-fixtures`, `packages/config`. Internal dependencies use `workspace:*`.
+>
+> **Dependency direction.** `contracts <- platform-core`; `contracts <- api-client`; `contracts <- fixtures`; `web <- everything else`. Forbidden: `contracts`, `web`, `api-client`, or `fixtures` depending on `web`. `contracts` holds only DTO/Zod schemas, adapter interfaces, branded IDs, enums — no React/Next/browser/DB/fetch/phone-normalization/side effects; depends on Zod only.
+>
+> **Public routes.** `/app`, `/learn`, `/p/[workspaceSlug]/[programSlug]`. No dynamic root route: the canonical public program URL is `/p/[workspaceSlug]/[programSlug]`, NOT `/[workspaceSlug]/[programSlug]`.
+>
+> **Data boundary (port/adapter).** `Screen → Query/Command → Port → Adapter`. UI must NOT import fixtures directly — fixtures are reached only through ports and adapters.
+>
+> **Entitlement vs integration health — two separate concepts.** `ProductEntitlements {promotorClass, promotorFlow}` (entitlement) is distinct from `IntegrationHealth {promotorFlow: AVAILABLE|UNAVAILABLE}` (integration health). Class-only (flow=false) is NOT an outage. `platform-core` owns `normalizePhone` (E.164 `+628...`) and `formatPhone`.
+>
+> **MockStateStore.** localStorage key `promotorclass:m0:state:v1`; seeds deterministic state if absent, persists across refresh, exposes `resetDemo()`, recovers corrupt state to the deterministic seed, versioned. `"use client"` only for MockStateStore/localStorage/interactive state/demo mutation/scenario switching/forms.
+>
+> **Acquisition demo path (M0).** Flow lifecycle limited to create/request + show reference + "Open in PromotorFlow"; `completeNextAction`/`rescheduleNextAction` forbidden in M0. Scenarios: `CLASS_ONLY` (flow=false), `BUNDLE_AVAILABLE` (flow=true, AVAILABLE — default), `BUNDLE_FLOW_UNAVAILABLE` (flow=true, UNAVAILABLE). Video: YouTube Unlisted + official embed + manual completion; `lib/video` only `parse-youtube-url.ts`, `youtube-id.ts`, `youtube-embed.ts`.
+>
+> **Mobile sharing boundary.** Share with future mobile: `contracts`, `platform-core`, `api-client`. Do NOT share: Next.js components, CSS, DOM code, web router, Server Components, web overlay implementations.
+
 ## Technical Architecture Blueprint
 
 **Product:** PromotorClass  
