@@ -50,17 +50,17 @@ export default function PromotorHomePage() {
   return (
     <Container size="wide">
       <Stack gap="8">
-        {/* Header with date and progress indicator (Turn 4a mockup) */}
+        {/* Header with date only (Turn 4a mockup) */}
         <div className="pc-app-header">
           <div>
             <h1 className="pc-page-title">Beranda</h1>
             <p className="pc-meta pc-meta--muted">Selasa, 11 Agu</p>
           </div>
-          <div className="pc-progress-indicator">
-            <span className="pc-progress-value">67%</span>
-            <span className="pc-progress-label">rata-rata selesai</span>
-          </div>
         </div>
+        
+        <p className="pc-home-stats">
+          174 peserta aktif · 32 baru bulan ini · rata-rata 67% selesai
+        </p>
         
         <Divider />
         <Stack gap="2">
@@ -90,12 +90,15 @@ export default function PromotorHomePage() {
           )}
         </Stack>
         <Divider />
-        <Stack gap="6">
+        <Stack gap="2">
           <SectionHeader title="Aktivitas terbaru" />
-          <EmptyState
-            title="Belum ada aktivitas"
-            description="Aktivitas peserta akan tampil di sini."
-          />
+          {/* Simple two-column timeline: timestamp | action */}
+          <div className="pc-timeline-simple">
+            <div className="pc-timeline-time">03:01</div>
+            <div className="pc-timeline-text">Ayu menyelesaikan Rencana Tindakan</div>
+            <div className="pc-timeline-time">02:44</div>
+            <div className="pc-timeline-text">Ayu mengisi refleksi</div>
+          </div>
         </Stack>
       </Stack>
     </Container>

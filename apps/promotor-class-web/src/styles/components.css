@@ -411,32 +411,54 @@
 
 /* ---------- Promotor shell ---------- */
 
-.pc-app-shell {
+.pc-app-header {
   display: flex;
-  min-height: 100dvh;
+  justify-content: space-between;
+  align-items: baseline;
+  padding-bottom: var(--space-3);
+  margin-bottom: var(--space-2);
 }
 
-.pc-sidebar {
-  display: none;
-  flex: none;
-  flex-direction: column;
-  width: var(--sidebar-width);
-  border-right: 1px solid var(--color-border);
-  background: var(--color-canvas);
-  padding: var(--space-5) var(--space-3);
+.pc-page-title {
+  font-size: var(--font-size-24);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text);
+  margin: 0;
 }
 
-.pc-sidebar-brand {
-  padding: 0 var(--space-3) var(--space-5);
+.pc-meta {
+  font-size: var(--font-size-13);
+  color: var(--color-text-muted);
+  margin: 0;
+}
+
+.pc-meta--muted {
+  color: var(--color-text-faint);
+}
+
+.pc-home-stats {
+  font-size: var(--font-size-13);
+  color: var(--color-text-muted);
+  line-height: var(--leading-body);
+  margin: 0 0 var(--space-4) 0;
+}
+
+.pc-progress-indicator {
+  text-align: right;
+}
+
+.pc-progress-value {
+  display: block;
   font-size: var(--font-size-16);
   font-weight: var(--weight-semibold);
   color: var(--color-text);
 }
 
-.pc-sidebar-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
+.pc-progress-label {
+  font-size: var(--font-size-13);
+  color: var(--color-text-muted);
+  margin-top: var(--space-1);
+}
 }
 
 .pc-app-header {
@@ -1648,53 +1670,63 @@ a.pc-sheet-row:hover {
   color: white;
 }
 
-/* ---------- Activity timeline with timestamps (Turn 4a) ---------- */
+/* ---------- Activity timeline — simple two-column (Turn 4a Beranda) ---------- */
+
+.pc-timeline-simple {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: var(--space-3);
+  font-size: var(--font-size-14);
+  line-height: var(--leading-body);
+}
+
+.pc-timeline-time {
+  color: var(--color-text-muted);
+  font-size: var(--font-size-13);
+  font-variant-numeric: tabular-nums;
+}
+
+.pc-timeline-text {
+  color: var(--color-text);
+}
+
+/* ---------- Activity full page with detailed timeline (future) ---------- */
 
 .pc-timeline-container {
   display: flex;
   flex-direction: column;
-  gap: 0; /* bordered lines handle spacing */
+  gap: 0;
 }
 
 .pc-timeline-item {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: var(--space-3);
+  display: flex;
+  flex-direction: column;
   padding: var(--space-4) 0;
   border-bottom: 1px solid var(--color-border);
-  position: relative;
 }
 
 .pc-timeline-item:last-child {
   border-bottom: none;
 }
 
-.pc-timeline-marker {
-  align-self: flex-start;
-  padding-left: calc(var(--space-3) / 2);
-}
-
-.pc-timeline-dot {
-  width: 12px;
-  height: 12px;
-  border-radius: 50%;
-  background: var(--color-accent);
-  box-shadow: 0 0 0 4px var(--color-surface-soft);
-}
-
-.pc-timeline-dot--warning { background: var(--color-warning); }
-.pc-timeline-dot--danger { background: var(--color-danger); }
-
-.pc-timeline-content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-}
-
 .pc-timeline-head {
   display: flex;
-  align-items: baseline;
-  gap: var(--space-3);
+  align-items: center;
+  gap: var(--space-2);
+  margin-bottom: var(--space-1);
+}
+
+.pc-timestamp-label {
+  font-size: var(--font-size-13);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.pc-timeline-content-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-2);
 }
 
 .pc-timeline-action {
@@ -1710,40 +1742,10 @@ a.pc-sheet-row:hover {
   color: var(--color-text);
 }
 
-.pc-timestamp-wrapper {
-  display: flex;
-  align-items: center;
-  gap: var(--space-2);
-}
-
-.pc-timestamp-label {
-  font-size: var(--font-size-13);
-  font-weight: var(--weight-medium);
-  color: var(--color-text-muted);
-  white-space: nowrap;
-}
-
-.pc-timestamp-value {
-  font-size: var(--font-size-13);
-  color: var(--color-text-faint);
-  white-space: nowrap;
-}
-
 .pc-timeline-body {
   font-size: var(--font-size-14);
   color: var(--color-text);
   line-height: var(--leading-body);
+  margin-top: var(--space-1);
   margin: 0;
-}
-
-.pc-timeline-footer {
-  display: flex;
-  align-items: center;
-  gap: var(--space-3);
-}
-
-@media (min-width: 768px) {
-  .pc-timeline-container {
-    max-width: 720px;
-  }
 }

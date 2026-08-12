@@ -8,7 +8,7 @@ export const metadata: Metadata = {
 };
 
 /**
- * Activity feed (design.md §25). Shows timestamped activity rows with action + target + optional reason.
+ * Activity feed (design.md §25). Shows timestamped activity rows with action + target.
  * M0 has no activity query exposed through module boundaries, so renders honest empty state.
  */
 export default function ActivityPage() {
@@ -23,13 +23,11 @@ export default function ActivityPage() {
         {/* Timeline container for consistent spacing */}
         <div className="pc-timeline-container">
           {/* Empty state — styled as minimal card */}
-          <div className="pc-empty-state pc-learn-hero-card" style={{ padding: "var(--space-8) 0" }}>
-            <div className="pc-learn-hero-content">
-              <h3 className="pc-learn-hero-title">Belum ada aktivitas</h3>
-              <p className="pc-learn-hero-desc">
-                Aktivitas peserta akan tampil di sini setiap mereka mengerjakan program.
-              </p>
-            </div>
+          <div className="pc-empty-state" style={{ padding: "var(--space-8) 0" }}>
+            <h3 className="pc-empty-title">Belum ada aktivitas</h3>
+            <p className="pc-empty-desc">
+              Aktivitas peserta akan tampil di sini setiap mereka mengerjakan program.
+            </p>
           </div>
         </div>
       </div>
