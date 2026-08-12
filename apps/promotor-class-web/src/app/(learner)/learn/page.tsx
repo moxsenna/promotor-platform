@@ -43,10 +43,18 @@ export default async function LearnerHomePage() {
         <SectionHeader title="Lanjutkan belajar" />
 
         {enrollments.length === 0 ? (
-          <EmptyState
-            title="Belum ada kelas"
-            description="Kelas yang dibagikan promotor akan muncul di sini."
-          />
+          <div className="pc-learn-hero-card">
+            <div className="pc-learn-hero-content">
+              <h3 className="pc-learn-hero-title">Belum ada kelas</h3>
+              <p className="pc-learn-hero-desc">
+                Kelas yang dibagikan promotor akan muncul di sini. Mulai belajar dari program pertama Anda!
+              </p>
+              <div className="pc-learn-hero-icon">📚</div>
+            </div>
+            <button className="pc-learn-hero-cta">
+              Eksplorasi program →
+            </button>
+          </div>
         ) : (
           <Stack gap="6">
             {enrollments.map((item) => {

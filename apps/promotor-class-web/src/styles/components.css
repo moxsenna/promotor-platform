@@ -1565,3 +1565,185 @@ a.pc-sheet-row:hover {
   border-radius: var(--radius-md);
   margin-bottom: var(--space-4);
 }
+
+/* ---------- Learner home — empty state hero card (Turn 4g) ---------- */
+
+.pc-learn-hero-card {
+  background: linear-gradient(180deg, var(--color-surface-soft) 0%, var(--color-surface) 100%);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-lg);
+  padding: var(--space-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+  min-height: 200px;
+}
+
+@media (min-width: 768px) {
+  .pc-learn-hero-card {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.pc-learn-hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+  flex: 1;
+}
+
+.pc-learn-hero-title {
+  font-size: var(--font-size-18);
+  font-weight: var(--weight-semibold);
+  color: var(--color-text);
+  margin: 0;
+}
+
+.pc-learn-hero-desc {
+  font-size: var(--font-size-15);
+  color: var(--color-text-muted);
+  line-height: var(--leading-body);
+  margin: 0;
+  max-width: 50ch;
+}
+
+.pc-learn-hero-icon {
+  width: 64px;
+  height: 64px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  color: white;
+  font-size: var(--font-size-32);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: var(--space-2);
+  flex: none;
+}
+
+.pc-learn-hero-cta {
+  background: transparent;
+  border: 2px solid var(--color-accent);
+  color: var(--color-accent);
+  font-size: var(--font-size-14);
+  font-weight: var(--weight-medium);
+  padding: var(--space-3) var(--space-5);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  transition: all var(--duration-fast) ease;
+  min-height: var(--touch-target);
+  min-width: var(--touch-target);
+}
+
+@media (min-width: 768px) {
+  .pc-learn-hero-cta {
+    align-self: flex-start;
+  }
+}
+
+.pc-learn-hero-cta:hover {
+  background: var(--color-accent);
+  color: white;
+}
+
+/* ---------- Activity timeline with timestamps (Turn 4a) ---------- */
+
+.pc-timeline-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0; /* bordered lines handle spacing */
+}
+
+.pc-timeline-item {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: var(--space-3);
+  padding: var(--space-4) 0;
+  border-bottom: 1px solid var(--color-border);
+  position: relative;
+}
+
+.pc-timeline-item:last-child {
+  border-bottom: none;
+}
+
+.pc-timeline-marker {
+  align-self: flex-start;
+  padding-left: calc(var(--space-3) / 2);
+}
+
+.pc-timeline-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--color-accent);
+  box-shadow: 0 0 0 4px var(--color-surface-soft);
+}
+
+.pc-timeline-dot--warning { background: var(--color-warning); }
+.pc-timeline-dot--danger { background: var(--color-danger); }
+
+.pc-timeline-content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.pc-timeline-head {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-3);
+}
+
+.pc-timeline-action {
+  font-size: var(--font-size-15);
+  font-weight: var(--weight-medium);
+  color: var(--color-text);
+  margin: 0;
+}
+
+.pc-timeline-target {
+  font-size: var(--font-size-14);
+  font-weight: var(--weight-medium);
+  color: var(--color-text);
+}
+
+.pc-timestamp-wrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.pc-timestamp-label {
+  font-size: var(--font-size-13);
+  font-weight: var(--weight-medium);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.pc-timestamp-value {
+  font-size: var(--font-size-13);
+  color: var(--color-text-faint);
+  white-space: nowrap;
+}
+
+.pc-timeline-body {
+  font-size: var(--font-size-14);
+  color: var(--color-text);
+  line-height: var(--leading-body);
+  margin: 0;
+}
+
+.pc-timeline-footer {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+@media (min-width: 768px) {
+  .pc-timeline-container {
+    max-width: 720px;
+  }
+}
