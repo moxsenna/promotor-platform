@@ -1758,3 +1758,44 @@ a.pc-sheet-row:hover {
   color: var(--color-text);
   margin: 0;
 }
+
+/* ---------- Learner list rows (Turn 3e) ---------- */
+
+.pc-learner-row {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-3);
+  padding: var(--space-3) 0;
+  border-bottom: 1px solid var(--color-border);
+  align-items: baseline;
+  text-decoration: none;
+  color: inherit;
+}
+
+.pc-learner-row:hover {
+  background: var(--color-surface-soft);
+}
+
+.pc-learner-name {
+  font-size: var(--font-size-16);
+  font-weight: var(--weight-medium);
+  color: var(--color-text);
+  margin: 0;
+}
+
+.pc-learner-meta {
+  font-size: var(--font-size-13);
+  color: var(--color-text-muted);
+  line-height: var(--leading-body);
+  margin-top: var(--space-1);
+  margin: 0;
+}
+
+.pc-learner-progress {
+  font-size: var(--font-size-14);
+  font-variant-numeric: tabular-nums;
+  color: var(--color-accent);
+  flex: none;
+  min-width: 52px;
+  text-align: right;
+}
