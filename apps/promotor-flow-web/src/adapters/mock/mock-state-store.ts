@@ -6,11 +6,23 @@
 
 import type { Contact } from "@promotor/contracts";
 
-// Define our state interface matching Flow domain
+// Rich TodayView item structure matching mockup requirements
+export interface TodayViewItem {
+  contact: Contact;
+  section: "terlambat" | "hari_inis" | "berikutnya";
+  statusType: "overdue" | "paid" | "pending_payment" | "aftercare" | "regular";
+  timeIndicator: string; // "1 hari", "14:00", "Jumat 10:00", "Aftercare"
+  serviceInfo: string; // "Parenting · Instagram", "Tes Family · Home visit"
+  actionText: string; // "Tanya jadwal weekend", "DP sudah dibayar"
+  hasWaButton: boolean;
+  isCompleted: boolean; // Shows checkmark vs WA button
+}
+
 interface MockState {
   contacts: Contact[];
-  nextActions: any[]; // Will be properly typed when NextAction contract available
-  bookings: any[];     // Will be properly typed when Booking contract available
+  nextActions: any[];
+  bookings: any[];
+  todayViewItems: TodayViewItem[];
 }
 
 const STORAGE_KEY = "promotor_flow_demo_state";
@@ -20,7 +32,6 @@ class MockStateStore {
   private loadedFromStorage: boolean;
 
   constructor(initialState?: MockState) {
-    // Try to load from localStorage first (only in browser)
     if (typeof window !== "undefined") {
       const stored = localStorage.getItem(STORAGE_KEY);
       if (stored) {
@@ -34,26 +45,19 @@ class MockStateStore {
       }
     }
 
-    // Load seed data if not loaded from storage
     this.state = initialState || this.getSeedData();
     this.loadedFromStorage = false;
   }
 
-  /**
-   * Get initial seed data for fresh demos
-   */
   private getSeedData(): MockState {
     return {
       contacts: this.seedContacts(),
       nextActions: [],
       bookings: [],
+      todayViewItems: this.seedTodayViewItems(),
     };
   }
 
-  /**
-   * Seed contacts with deterministic data
-   * Uses same contact IDs as promotor-class fixtures for integration testing
-   */
   private seedContacts(): Contact[] {
     return [
       {
@@ -61,6 +65,12 @@ class MockStateStore {
         organizationId: "org_promotor" as any,
         phoneE164: "+628121110001",
         name: "Ayu Rahma",
+      },
+      {
+        id: "contact_arief" as any,
+        organizationId: "org_promotor" as any,
+        phoneE164: "+628121110004",
+        name: "Arief Santoso",
       },
       {
         id: "contact_dimas" as any,
@@ -77,9 +87,67 @@ class MockStateStore {
     ];
   }
 
-  /**
-   * Persist current state to localStorage
-   */
+  private seedTodayViewItems(): TodayViewItem[] {
+    const contactMap = new Map<string, Contact>();
+    this.seedContacts().forEach((c) => contactMap.set(c.id as string, c));
+
+    return [
+      // Terlambat section
+      {
+        contact: contactMap.get("contact_ayu")!,
+        section: "terlambat",
+        statusType: "overdue",
+        timeIndicator: "1 hari",
+        serviceInfo: "Parenting · Instagram",
+        actionText: "Tanya jadwal weekend",
+        hasWaButton: true,
+        isCompleted: false,
+      },
+      // Hari ini section
+      {
+        contact: contactMap.get("contact_arief")!,
+        section: "hari_inis",
+        statusType: "paid",
+        timeIndicator: "14:00",
+        serviceInfo: "Tes Family · Home visit",
+        actionText: "DP sudah dibayar",
+        hasWaButton: false,
+        isCompleted: true,
+      },
+      {
+        contact: contactMap.get("contact_dimas")!,
+        section: "hari_inis",
+        statusType: "pending_payment",
+        timeIndicator: "Jumat 10:00",
+        serviceInfo: "Tes Personal · Datang ke lokasi",
+        actionText: "DP belum dibayar",
+        hasWaButton: true,
+        isCompleted: false,
+      },
+      {
+        contact: contactMap.get("contact_reni")!,
+        section: "hari_inis",
+        statusType: "aftercare",
+        timeIndicator: "Aftercare",
+        serviceInfo: "Klien · Tes Personal, 5 Agu",
+        actionText: "Tanya pemahaman hasil",
+        hasWaButton: true,
+        isCompleted: false,
+      },
+      // Berikutnya section
+      {
+        contact: contactMap.get("contact_ayu")!,
+        section: "berikutnya",
+        statusType: "regular",
+        timeIndicator: "Besok 09:00",
+        serviceInfo: "Consultasi · Zoom call",
+        actionText: "Konfirmasi waktu",
+        hasWaButton: true,
+        isCompleted: false,
+      },
+    ];
+  }
+
   persist(): void {
     if (typeof window === "undefined") return;
     
@@ -131,20 +199,33 @@ class MockStateStore {
     return true;
   }
 
+  // ========== Today View Data ==========
+
+  getTodayViewItems(): TodayViewItem[] {
+    return [...this.state.todayViewItems];
+  }
+
+  getTodayViewItemsBySection(section: "terlambat" | "hari_inis" | "berikutnya"): TodayViewItem[] {
+    return this.state.todayViewItems.filter((item) => item.section === section);
+  }
+
+  getOverdueCount(): number {
+    return this.state.todayViewItems.filter(
+      (item) => item.section === "terlambat"
+    ).length;
+  }
+
+  getTotalActionCount(): number {
+    return this.state.todayViewItems.length;
+  }
+
   // ========== Utility Methods ==========
 
-  /**
-   * Reset to deterministic seed data
-   * Useful for demo mode restoration
-   */
   resetDemo(): void {
     this.state = this.getSeedData();
     this.persist();
   }
 
-  /**
-   * Check if state was loaded from storage or seeded fresh
-   */
   wasLoadedFromStorage(): boolean {
     return this.loadedFromStorage;
   }

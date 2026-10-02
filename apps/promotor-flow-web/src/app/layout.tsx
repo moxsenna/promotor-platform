@@ -5,7 +5,7 @@ export const metadata = {
   description: "Calm, efficient CRM for promotors",
 };
 
-export default function PromotorLayout({
+export default function RootLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -14,7 +14,9 @@ export default function PromotorLayout({
     <html lang="id">
       <body>
         <div className="pf-page-frame">
-          <main className="pf-app-main">{children}</main>
+          <main className="pf-app-main">
+            <div className="page-container">{children}</div>
+          </main>
         </div>
       </body>
     </html>
