@@ -7,3 +7,6 @@ dist/
 .DS_Store
 .env*
 !.env.example
+
+# Wakonek WhatsApp session (device token, server-side saja)
+.wa-session.json
