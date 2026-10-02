@@ -4,13 +4,24 @@
  */
 
 import { mockStore } from "@/adapters/mock/mock-state-store";
+import { WaActionButton } from "@/components/WaActionButton";
+import { buildWaMessage } from "@/lib/wa-templates";
 
-export default function ContactDetailPage({ params }: { params: { id: string } }) {
-  const contact = mockStore.getContactById(params.id);
+export default async function ContactDetailPage({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}) {
+  const { id } = await params;
+  const contact = mockStore.getContactById(id);
 
   if (!contact) {
     return <div style={{ padding: 20 }}>Kontak tidak ditemukan</div>;
   }
+
+  const waMessage = buildWaMessage("FIRST_CONTACT", {
+    firstName: contact.name.split(/\s+/)[0],
+  });
 
   return (
     <>
@@ -144,21 +155,13 @@ export default function ContactDetailPage({ params }: { params: { id: string } }
           >
             Terlambat 1 hari · kemarin 10:00
           </div>
-          <button
-            style={{
-              width: "100%",
-              height: 46,
-              marginTop: 14,
-              border: "none",
-              borderRadius: 8,
-              background: "#167A68",
-              color: "#fff",
-              font: "600 15px Inter, system-ui, sans-serif",
-              cursor: "pointer",
-            }}
-          >
-            Buka WhatsApp
-          </button>
+          <WaActionButton
+            variant="full"
+            label="Kirim via WhatsApp"
+            contactName={contact.name}
+            phoneE164={contact.phoneE164}
+            message={waMessage}
+          />
           <div style={{ display: "flex", gap: 20, paddingTop: 12 }}>
             <button
               style={{

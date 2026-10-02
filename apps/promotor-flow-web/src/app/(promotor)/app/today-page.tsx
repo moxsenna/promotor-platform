@@ -2,7 +2,17 @@ import { mockStore } from "@/adapters/mock/mock-state-store";
 import { AddButton } from "@/components/AddButton";
 import { BottomNav } from "@/components/BottomNav";
 import { WaStatusBadge } from "@/components/WaStatusBadge";
+import { WaActionButton } from "@/components/WaActionButton";
+import { buildWaMessage, templateForTodayStatus } from "@/lib/wa-templates";
 import type { TodayViewItem } from "@/adapters/mock/mock-state-store";
+
+function todayWaMessage(item: TodayViewItem): string {
+  return buildWaMessage(templateForTodayStatus(item.statusType), {
+    firstName: item.contact.name.split(/\s+/)[0],
+    serviceName: item.serviceInfo.split("·")[0].trim(),
+    bookingDate: item.timeIndicator || undefined,
+  });
+}
 
 interface SectionProps {
   title: string;
@@ -114,42 +124,12 @@ function ContactRow({ item }: { item: TodayViewItem }) {
               <path d="M6 3.5L10.5 8L6 12.5" />
             </svg>
           ) : (
-            <button
-              aria-label="Kirim WhatsApp"
-              style={{
-                width: 56,
-                height: 44,
-                margin: "-7px -6px -7px 0",
-                padding: 0,
-                border: "none",
-                background: "none",
-                cursor: "pointer",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "flex-end",
-              }}
-            >
-              <span
-                style={{
-                  minWidth: 44,
-                  height: 30,
-                  padding: "0 10px",
-                  border: "1px solid #D5D3CE",
-                  borderRadius: 6,
-                  background: "#fff",
-                  fontWeight: 600,
-                  fontSize: 12.5,
-                  lineHeight: "28px",
-                  fontFamily: "Inter, system-ui, sans-serif",
-                  color: "#167A68",
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                }}
-              >
-                WA
-              </span>
-            </button>
+            <WaActionButton
+              variant="pill"
+              contactName={item.contact.name}
+              phoneE164={item.contact.phoneE164}
+              message={todayWaMessage(item)}
+            />
           )}
         </div>
       </div>
