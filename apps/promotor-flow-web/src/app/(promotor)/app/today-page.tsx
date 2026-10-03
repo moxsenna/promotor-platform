@@ -1,6 +1,7 @@
 import { mockStore } from "@/adapters/mock/mock-state-store";
 import { AddButton } from "@/components/AddButton";
 import { BottomNav } from "@/components/BottomNav";
+import { WaReplyBadge } from "@/components/WaReplyBadge";
 import { WaStatusBadge } from "@/components/WaStatusBadge";
 import { WaActionButton } from "@/components/WaActionButton";
 import { buildWaMessage, templateForTodayStatus } from "@/lib/wa-templates";
@@ -217,6 +218,7 @@ export async function TodayPage() {
             </div>
           </div>
           <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <WaReplyBadge />
             <WaStatusBadge />
             <AddButton size={44} iconSize={20} />
           </div>

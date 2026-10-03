@@ -10,3 +10,5 @@ dist/
 
 # Wakonek WhatsApp session (device token, server-side saja)
 .wa-session.json
+# Wakonek WhatsApp inbox (balasan masuk, server-side saja)
+.wa-inbox.json

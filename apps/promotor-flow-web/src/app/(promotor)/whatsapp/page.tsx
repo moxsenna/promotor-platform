@@ -4,6 +4,7 @@
  */
 
 import { BottomNav } from "@/components/BottomNav";
+import { WaInbox } from "@/components/WaInbox";
 import { WhatsAppConnect } from "@/components/WhatsAppConnect";
 
 export default function WhatsAppPage() {
@@ -25,6 +26,7 @@ export default function WhatsAppPage() {
 
         <div style={{ padding: "20px 16px 24px", display: "flex", flexDirection: "column", gap: 14 }}>
           <WhatsAppConnect />
+          <WaInbox />
         </div>
       </div>
       <BottomNav />
